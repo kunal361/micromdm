@@ -96,6 +96,10 @@ func MarshalEvent(e *Event) ([]byte, error) {
 			NotManaged:            cmd.NotManaged,
 			ChangeManagementState: cmd.ChangeManagementState,
 		}
+	case "InstallProvisioningProfile":
+		payload.Command.InstallProvisioningProfile = &commandproto.InstallProvisioningProfile{
+			ProvisioningProfile: e.Payload.Command.InstallProvisioningProfile.ProvisioningProfile,
+		}
 	}
 	return proto.Marshal(&commandproto.Event{
 		Id:         e.ID,
@@ -186,6 +190,10 @@ func UnmarshalEvent(data []byte, e *Event) error {
 			ManifestURL:           cmd.GetManifestUrl(),
 			ManagementFlags:       int(cmd.GetManagementFlags()),
 			ChangeManagementState: cmd.GetChangeManagementState(),
+		}
+	case "InstallProvisioningProfile":
+		e.Payload.Command.InstallProvisioningProfile = mdm.InstallProvisioningProfile{
+			ProvisioningProfile: pb.Payload.Command.InstallProvisioningProfile.ProvisioningProfile,
 		}
 	}
 	return nil

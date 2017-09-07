@@ -24,6 +24,7 @@ message Command {
     ScheduleOSUpdateScan schedule_os_update_scan = 7;
     RemoveProfile remove_profile = 8;
     DeleteUser delete_user = 9;
+    InstallProvisioningProfile install_provisioning_profile = 10;
 }
 
 message ScheduleOSUpdate {
@@ -62,6 +63,10 @@ message InstallProfile {
 
 message RemoveProfile {
     string identifier = 1;
+}
+
+message InstallProvisioningProfile {
+    bytes provisioning_profile = 1;
 }
 
 message DeleteUser {
